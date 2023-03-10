@@ -6,6 +6,7 @@ Modified top module (DE2-Default)
 Edits: 
 	#Removed unneccesary ports/interfaces from code
 	#Added the Color_Controller module to change color in realtime
+	#Added user interface to change starting location of initial pixel
 */
 module dla
 	(
@@ -220,6 +221,8 @@ begin
 		y_walker <= 9'd120;
 		LEDR<= 18'h0;
 		LEDG<= 8'h0;
+		//upon initialization, user can choose which corner of the screen to start simulation
+		//--defaults to center
 		if(SW[0]) begin
 			LEDR[0] <= 1;
 			starting_location <= {9'd25,9'd200} ;	//bottom left of screen
@@ -237,7 +240,7 @@ begin
 			starting_location <= {9'd295,9'd200} ;	//bottom right of screen
 		end
 		else begin
-			//LEDG[8]<=1;
+			LEDG[7]<=1;//seems to effect how dense pixel display looks
 			starting_location <= {9'd160,9'd120} ; //middle of screen
 		end
 		
